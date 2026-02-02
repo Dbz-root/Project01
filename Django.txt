@@ -1,0 +1,7 @@
+- Django-admin startproject mypage
+
+- __init__.py
+- asgi.py and wsgi.py for deployment
+
+python manage.py runserver // to preview server for this project
+
