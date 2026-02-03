@@ -1,7 +1,31 @@
-- Django-admin startproject mypage
+- Django-admin startproject mypage   // create a project 
 
 - __init__.py
 - asgi.py and wsgi.py for deployment
 
 python manage.py runserver // to preview server for this project
 
+python manage.py startapp challenges // to create an app in a project
+
+inside an app you find : 
+
+admin.py --- admin area
+apps.py  ---  
+models   ---
+tests    ---
+views    ---  
+
+
+URLs (routes) & views
+
+URLs (routes)  for ex amazon.com/titles/
+Views = functions or Classes
+
+so structure of a django project 
+
+                                  -------- monthly challenges ( a sub folder created automaticly with the project) 
+                                  -
+project : Monthly challenges ------
+                                  -                                                                          - views (already exists after creation of app)                                
+                                  -------- challenges (an app we created after creating the project) ---- 
+                                                                                                             - urls (not automaticly created, done manually)
