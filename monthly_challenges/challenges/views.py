@@ -43,11 +43,16 @@ def month_by_number(request, aaa):
 
 def month(request, aaa):
     
-    try:
-        responde_data = f"<h1>{mc_dict[aaa]}</h1>"
-        return HttpResponse(responde_data)
-    except:
-        return HttpResponseNotFound ("<h1>Enter a valid month</h1>")
+    # try:
+        challenge_text = mc_dict[aaa]
+        title_text = aaa
+        return render(request, "challenges/challenge.html", {
+            "text": challenge_text,
+            "title": title_text
+            
+        })
+    # except:
+    #     return HttpResponseNotFound ("<h1>Enter a valid month</h1>")
 
 
 
