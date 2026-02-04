@@ -1,48 +1,54 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
 # Create your views here.
 
 # view function
 
 
-def month_by_number(request, aaa):
-    return HttpResponse(aaa)
+def index(request):
+    res = ""
+    res_li=""
+    for i in list(mc_dict.keys()):
+        month_path = reverse ("url_month", args=[i])
+        res_li += f"<li><a href=\"{month_path}\">{i}</a></li>"
+    res = f"<ul>{res_li}</ul>"
+    return HttpResponse(res)
 
+mc_dict = {
+    "January":"Work",
+    "February":"Sleep",
+    "March":"Eat",
+    "April":"Run",
+    "May":"Make",
+    "June":"Jump",
+    "July":"Joy",
+    "August":"Acc",
+    "September":"Step",
+    "October":"Official",
+    "November":"Need",
+    "December":"Do",
+}
+
+def month_by_number(request, aaa):
+    
+    mc_dict_keys = list(mc_dict.keys())
+    
+    if aaa  > len(mc_dict_keys) :
+        return HttpResponseNotFound ("enter a valid month number")
+    redirect_month = mc_dict_keys[aaa-1]
+    redirect_path = reverse ("url_month", args=[redirect_month])
+    
+    return HttpResponseRedirect (redirect_path)
 
 def month(request, aaa):
-    challenge_text = None,
-    if aaa == 'january':
-        challenge_text = '1st month'
-    elif aaa == 'february':
-        challenge_text = '2nd Month'
-    elif aaa == 'march':
-        challenge_text = '3rd Month'
-    elif aaa == 'april':
-        challenge_text = '4th Month'
-    elif aaa == 'may':
-        challenge_text = '5th Month'
-    elif aaa == 'june':
-        challenge_text = '6th Month'
-    elif aaa == 'july':
-        challenge_text = '7th Month'
-    elif aaa == 'august':
-        challenge_text = '8th Month'
-    elif aaa == 'september':
-        challenge_text = '9th Month'
-    elif aaa == 'october':
-        challenge_text = '10th Month'
-    elif aaa == 'november':
-        challenge_text = '11th Month'
-    elif aaa == 'december':
-        challenge_text = '12th Month'
-    else:
-        return HttpResponseNotFound('enter a valid month plz')
+    
+    try:
+        responde_data = f"<h1>{mc_dict[aaa]}</h1>"
+        return HttpResponse(responde_data)
+    except:
+        return HttpResponseNotFound ("<h1>Enter a valid month</h1>")
 
-    return HttpResponse(challenge_text)
-
-
-def index(request):
-    return HttpResponse("This works!")
 
 
 # def janview(request):
