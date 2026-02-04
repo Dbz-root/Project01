@@ -7,53 +7,56 @@ from django.urls import reverse
 
 
 def index(request):
-    res = ""
-    res_li=""
-    for i in list(mc_dict.keys()):
-        month_path = reverse ("url_month", args=[i])
-        res_li += f"<li><a href=\"{month_path}\">{i}</a></li>"
-    res = f"<ul>{res_li}</ul>"
-    return HttpResponse(res)
+
+    list_months = list(mc_dict.keys())
+    return render(request, "challenges\index.html", {
+        "months": list_months,
+
+
+    })
+
 
 mc_dict = {
-    "January":"Work",
-    "February":"Sleep",
-    "March":"Eat",
-    "April":"Run",
-    "May":"Make",
-    "June":"Jump",
-    "July":"Joy",
-    "August":"Acc",
-    "September":"Step",
-    "October":"Official",
-    "November":"Need",
-    "December":"Do",
+    "january": "Work",
+    "february": "Sleep",
+    "march": "Eat",
+    "april": "Run",
+    "may": "Make",
+    "june": "Jump",
+    "july": "Joy",
+    "august": "Acc",
+    "september": "Step",
+    "october": "Official",
+    "november": "Need",
+    "december": "Do",
 }
 
+
 def month_by_number(request, aaa):
-    
+
     mc_dict_keys = list(mc_dict.keys())
-    
-    if aaa  > len(mc_dict_keys) :
-        return HttpResponseNotFound ("enter a valid month number")
+
+    if aaa > len(mc_dict_keys):
+        return HttpResponseNotFound("enter a valid month number")
     redirect_month = mc_dict_keys[aaa-1]
-    redirect_path = reverse ("url_month", args=[redirect_month])
-    
-    return HttpResponseRedirect (redirect_path)
+    redirect_path = reverse("url_month", args=[redirect_month])
+
+    return HttpResponseRedirect(redirect_path)
+
 
 def month(request, aaa):
-    
+
     # try:
-        challenge_text = mc_dict[aaa]
-        title_text = aaa
-        return render(request, "challenges/challenge.html", {
-            "text": challenge_text,
-            "title": title_text
-            
-        })
+    challenge_text = mc_dict[aaa]
+    title_text = aaa
+    return render(request, "challenges/challenge.html", {
+        "text": challenge_text,
+        "title": title_text
+
+    })
+
     # except:
     #     return HttpResponseNotFound ("<h1>Enter a valid month</h1>")
-
 
 
 # def janview(request):
