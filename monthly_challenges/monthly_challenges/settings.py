@@ -58,6 +58,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             # BASE_DIR / "challenges" / "templateS"   # this can be removed if the app is called up in the installed apps
+            BASE_DIR / "templates"
             ],
         'APP_DIRS': True,
         'OPTIONS': {

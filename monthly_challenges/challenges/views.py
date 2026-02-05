@@ -28,7 +28,7 @@ mc_dict = {
     "september": "Step",
     "october": "Official",
     "november": "Need",
-    "december": "Do",
+    "december": None,
 }
 
 
