@@ -2,10 +2,10 @@ from django.urls import path
 from . import views
 urlpatterns = [
     # this tells django which view corresponds to which path (means if the path is january it will call the view index)
-    path("", views.index),
+    path("", views.index, name="index"),
     path("<int:aaa>", views.month_by_number, name="url_month_by_number"),
     path("<str:aaa>", views.month, name="url_month"),
-    
+
 
 
     # path("january", views.janview),

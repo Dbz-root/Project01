@@ -1,6 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
+
+
 # Create your views here.
 
 # view function
@@ -46,17 +48,17 @@ def month_by_number(request, aaa):
 
 def month(request, aaa):
 
-    # try:
-    challenge_text = mc_dict[aaa]
-    title_text = aaa
-    return render(request, "challenges/challenge.html", {
-        "text": challenge_text,
-        "title": title_text
+    try:
+        challenge_text = mc_dict[aaa]
+        title_text = aaa
+        return render(request, "challenges/challenge.html", {
+            "text": challenge_text,
+            "title": title_text
 
-    })
+        })
 
-    # except:
-    #     return HttpResponseNotFound ("<h1>Enter a valid month</h1>")
+    except:
+        raise Http404("404.html")
 
 
 # def janview(request):
